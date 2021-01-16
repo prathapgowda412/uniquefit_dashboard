@@ -5,7 +5,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Paper,
+  makeStyles,
 } from '@material-ui/core';
 import {
   AddBoxRounded,
@@ -22,20 +22,23 @@ import {
 } from '@material-ui/icons';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PaperDash from '../components/PaperDash';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '0px 15px 100px 10px',
+  },
+}));
 
 function SideNav() {
+  const classes = useStyles();
   return (
-    <Grid
-      xs={3}
-      item
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-    >
-      <Paper style={{ backgroundColor: 'white', width: '85%' }}>
+    <Grid xs={3} item className={classes.root}>
+      <PaperDash>
         <List>
-          <ListItem to='/' component={NavLink}>
+          <ListItem button to='/' component={NavLink}>
             <ListItemIcon>
               <AssessmentOutlined />
             </ListItemIcon>
@@ -44,7 +47,7 @@ function SideNav() {
           <ProductsMenu />
           <OrdersMenu />
         </List>
-      </Paper>
+      </PaperDash>
     </Grid>
   );
 }

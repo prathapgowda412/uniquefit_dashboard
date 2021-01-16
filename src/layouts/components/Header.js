@@ -4,7 +4,7 @@ import React from 'react';
 import uniquefitLogoWhie from '../../Assets/uniquefitlogowhite.png';
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '65px',
+    height: '60px',
     position: 'relative',
   },
 }));
@@ -14,7 +14,7 @@ function Header() {
   return (
     <AppBar elevation={0} color='Primary' className={classes.root}>
       <Toolbar>
-        <img height='45px' src={uniquefitLogoWhie} />
+        <img height='35px' src={uniquefitLogoWhie} />
       </Toolbar>
     </AppBar>
   );

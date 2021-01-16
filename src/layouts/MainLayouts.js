@@ -1,7 +1,8 @@
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid, makeStyles, Paper } from '@material-ui/core';
 import React from 'react';
 import Routing from '../routing';
 import Header from './components/Header';
+import PaperDash from './components/PaperDash';
 import SideNav from './Sidemenu/SideMenu';
 
 const useStyles = makeStyles(() => ({
@@ -31,7 +32,9 @@ function MainLayouts() {
         >
           <SideNav />
           <Grid xs={9} item>
-            <Routing />
+            <PaperDash>
+              <Routing />
+            </PaperDash>
           </Grid>
         </Grid>
       </Grid>
