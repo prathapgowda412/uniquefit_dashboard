@@ -113,7 +113,7 @@ const OrdersMenu = () => {
           disablePadding
           style={{ width: '90%', float: 'right' }}
         >
-          <ListItem button component={NavLink} to='/products'>
+          <ListItem button component={NavLink} to='/orders-recieved'>
             <ListItemIcon>
               <AddBoxRounded />
             </ListItemIcon>

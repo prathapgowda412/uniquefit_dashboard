@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import NotFound from './layouts/components/NotFound';
 import Dashboard from './views/Dashboard/Dashboard';
+import RecievedOrders from './views/Orders/RecievedOrders';
 import AddProducts from './views/Products/AddProducts';
 import DeleteProducts from './views/Products/DeleteProducts';
 import Products from './views/Products/Products';
@@ -24,6 +25,9 @@ function Routing() {
       </Route>
       <Route path='/updateproducts'>
         <UpdateProducts />
+      </Route>
+      <Route path='/orders-recieved'>
+        <RecievedOrders />
       </Route>
       <Route path='*'>
         <NotFound />
