@@ -1,5 +1,4 @@
 import NotFound from './components/notFound';
-import Dashboard from './views/dashboard';
 import Product from './views/product';
 import { Redirect } from 'react-router-dom';
 import MainCompo from './components/mainCompo';
