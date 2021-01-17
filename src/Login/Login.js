@@ -1,18 +1,13 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
+import React, { useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import UniquefitLogo from '../Assets/uniquefitblacklogo.png';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: '50px',
+    marginTop: '20px',
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -37,13 +32,43 @@ const useStyles = makeStyles((theme) => ({
 function AdminLogin() {
   const classes = useStyles();
 
+  const [adminUserEmail, setadminUserEmail] = React.useState();
+  const [adminPassword, setAdminPassword] = React.useState();
+  const handleEmail = (event) => {
+    setadminUserEmail(event.target.value);
+  };
+  const handlePassword = (event) => {
+    setAdminPassword(event.target.value);
+  };
+  useEffect(() => {}, [adminUserEmail, adminPassword]);
+  const onClickLogin = () => {
+    let loginData = {
+      adminEmail: adminUserEmail,
+      adminPassword: adminPassword,
+    };
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/admin/adminLogin`, loginData)
+      .then((resp) => {
+        console.log(resp);
+        if (resp.data.token) {
+          console.log('user verified token recieved :');
+          console.log(resp.data.token);
+          localStorage.setItem('adminToken', resp.data.token);
+          window.location.reload();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // console.log(resp);
+  };
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
         <img src={UniquefitLogo} height='50px' />
-        <Typography component='h1' variant='h5'>
-          Sign in
+        <Typography component='h1' style={{ marginTop: '40px' }} variant='h5'>
+          Admin Login
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -55,6 +80,7 @@ function AdminLogin() {
             label='Admin Address'
             name='email'
             autoComplete='email'
+            onChange={handleEmail}
             autoFocus
           />
           <TextField
@@ -67,19 +93,20 @@ function AdminLogin() {
             type='password'
             id='password'
             autoComplete='current-password'
+            onChange={handlePassword}
           />
           {/* <FormControlLabel
             control={<Checkbox value='remember' color='primary' />}
             label='Remember me'
           /> */}
           <Button
-            type='submit'
             fullWidth
             variant='contained'
             color='primary'
             className={classes.submit}
+            onClick={onClickLogin}
           >
-            Sign In
+            Log In
           </Button>
         </form>
       </div>

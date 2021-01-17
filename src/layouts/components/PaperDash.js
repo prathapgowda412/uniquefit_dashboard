@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 const PaperDash = (props) => {
   const classes = useStyles();
-  return <Paper square elevation {...props} className={classes.paper} />;
+  return <Paper square elevation={0} {...props} className={classes.paper} />;
 };
 PaperDash.muiName = 'Paper';
 export default PaperDash;
