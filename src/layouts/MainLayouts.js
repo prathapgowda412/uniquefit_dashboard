@@ -7,7 +7,7 @@ import SideNav from './Sidemenu/SideMenu';
 
 const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: '#fff',
+    backgroundColor: '#F2f2f2',
     height: '100vh',
     width: '100%',
     overflow: 'hidden',
@@ -25,14 +25,13 @@ function MainLayouts() {
           item
           container
           style={{
-            height: '100%',
-            backgroundColor: '#f2f2f2',
+            height: '98%',
             paddingTop: '15px',
           }}
         >
           <SideNav />
-          <Grid xs={9} item>
-            <PaperDash>
+          <Grid xs={9} item style={{ height: '92%' }}>
+            <PaperDash style={{ height: '100%', overflowY: 'scroll' }}>
               <Routing />
             </PaperDash>
           </Grid>

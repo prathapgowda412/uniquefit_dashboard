@@ -19,6 +19,7 @@ import {
   ListRounded,
   LoyaltyOutlined,
   PlaylistAddCheckRounded,
+  ViewListRounded,
 } from '@material-ui/icons';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
@@ -72,6 +73,12 @@ const ProductsMenu = () => {
           disablePadding
           style={{ width: '90%', float: 'right' }}
         >
+          <ListItem button component={NavLink} to='/products'>
+            <ListItemIcon>
+              <ViewListRounded />
+            </ListItemIcon>
+            <ListItemText primary='All Products' />
+          </ListItem>
           <ListItem button component={NavLink} to='/addProducts'>
             <ListItemIcon>
               <AddCircleOutline />

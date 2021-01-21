@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -40,26 +40,38 @@ function AdminLogin() {
   const handlePassword = (event) => {
     setAdminPassword(event.target.value);
   };
-  useEffect(() => {}, [adminUserEmail, adminPassword]);
-  const onClickLogin = () => {
+
+  const onClickLogin = async () => {
     let loginData = {
       adminEmail: adminUserEmail,
       adminPassword: adminPassword,
     };
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/admin/adminLogin`, loginData)
-      .then((resp) => {
-        console.log(resp);
-        if (resp.data.token) {
-          console.log('user verified token recieved :');
-          console.log(resp.data.token);
-          localStorage.setItem('adminToken', resp.data.token);
-          window.location.reload();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const resp = await axios.post(
+      `${process.env.REACT_APP_API_URL}/admin/adminLogin`,
+      loginData
+    );
+    if (resp.data.token) {
+      console.log('user verified token recieved :');
+      console.log(resp.data.token);
+      localStorage.setItem('adminToken', resp.data.token);
+      window.location.reload();
+    } else {
+      console.log('something wrong');
+    }
+    // axios
+    //   .post(`${process.env.REACT_APP_API_URL}/admin/adminLogin`, loginData)
+    //   .then((resp) => {
+    //     console.log(resp);
+    //     if (resp.data.token) {
+    //       console.log('user verified token recieved :');
+    //       console.log(resp.data.token);
+    //       localStorage.setItem('adminToken', resp.data.token);
+    //       window.location.reload();
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
     // console.log(resp);
   };
   return (

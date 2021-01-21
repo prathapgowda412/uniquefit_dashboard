@@ -1,6 +1,6 @@
 import { makeStyles, Paper } from '@material-ui/core';
 import React from 'react';
-
+import './../../Css/ScrollBar.css';
 const useStyles = makeStyles((theme) => ({
   paper: {
     boxShadow: '0px 0px 4px rgba(0,0,0,0.1)',
