@@ -9,7 +9,7 @@ function App() {
   if (adminToken) {
     return <MainLayouts />;
   } else {
-    return <AdminLogin />;
+    return <MainLayouts />;
   }
 }
 
