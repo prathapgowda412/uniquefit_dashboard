@@ -1,4 +1,4 @@
-// import React, { useEffect } from 'react';
+
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable no-unused-vars */
 /* eslint-disable array-callback-return */
@@ -32,12 +32,12 @@ const useStyles = makeStyles(() => ({
     backgroundColor: 'transparent',
     // backgroundColor: '#f2f2f2',
   },
-  addproductcont: {
+  updateproductcont: {
     minHeight: '250px',
     // backgroundColor: 'lightblue',
     alignSelf: 'left',
   },
-  addproductlabel: {
+  updateproductlabel: {
     color: 'black',
     fontWeight: 'bold',
     fontSize: '24px',
@@ -59,7 +59,7 @@ const useStyles = makeStyles(() => ({
   righttabpanel: {
     width: '100%',
   },
-  addproductbutton: {
+  updateproductbutton: {
     backgroundColor: '#387A76',
     height: '48px',
     width: '80%',
@@ -90,24 +90,23 @@ const useStyles = makeStyles(() => ({
 }));
 
 function UpdateProducts() {
+  const productidchange = (e) => {
+    setproductid(e.target.value);
+  }; //done
   const productnamechange = (e) => {
     setproductname(e.target.value);
   }; //done
-  const productpricechange = (e) => {
-    setproductprice(e.target.value);
+  const productpatternchange = (e) => {
+    setproductpattern(e.target.value);
   }; //done
-  const productsalepricechange = (e) => {
-    setproductsaleprice(e.target.value);
-  }; //done
-  const productmaterialchange = (e) => {
-    setproductmaterial(e.target.value);
+  const producttpatternchange = (e) => {
+    setproducttpattern(e.target.value);
   }; //doe
-  const producttypechange = (e) => {
-    setproducttype(e.target.value);
+  const productttpatternchange = (e) => {
+    setproductttpattern(e.target.value);
   }; //done
-  const productdescriptionchange = (e) => {
-    setproductdescription(e.target.value);
-  }; //done
+
+
   const [files, setfiles] = React.useState();
   const [selectedfile, setselectedfile] = React.useState();
   const [preview, setpreview] = React.useState();
@@ -124,17 +123,13 @@ function UpdateProducts() {
     return () => URL.revokeObjectURL(objecturl);
   }, [selectedfile]);
 
+  const [productid, setproductid] = React.useState();
   const [productname, setproductname] = React.useState();
-  const [productprice, setproductprice] = React.useState();
-  const [productsaleprice, setproductsaleprice] = React.useState();
-  const [productmaterial, setproductmaterial] = React.useState();
-  const [productcolor, setproductcolor] = React.useState();
-  // const [productcategory, setproductcategory] = React.useState();
-  const [producttype, setproducttype] = React.useState();
-  const [productdescription, setproductdescription] = React.useState();
   const [productpattern, setproductpattern] = React.useState();
-  const [productoccasion, setproductoccasion] = React.useState();
-  const [productfeel, setproductfeel] = React.useState();
+  const [producttpattern, setproducttpattern] = React.useState();
+  const [productttpattern, setproductttpattern] = React.useState();
+  // const [productcategory, setproductcategory] = React.useState();
+
 
   const onsubmitproduct = async () => {
     // const productdata = {
@@ -154,15 +149,9 @@ function UpdateProducts() {
 
     productdata.append('productid', Math.round(Math.random() * 100000000));
     productdata.append('productname', productname);
-    productdata.append('productprice', +productprice);
-    productdata.append('productcolor', productcolor);
-    productdata.append('productdescription', productdescription);
-    productdata.append('productsaleprice', +productsaleprice);
-    productdata.append('productmaterial', productmaterial);
-    productdata.append('productfeel', productfeel);
-    productdata.append('productoccasion', productoccasion);
-    productdata.append('producttype', producttype);
     productdata.append('productpattern', productpattern);
+    productdata.append('producttpattern', productpattern);
+    productdata.append('productttpattern', productpattern);
     console.log(files);
     files.map((file) => {
       productdata.append('pimages', file);
@@ -190,9 +179,9 @@ function UpdateProducts() {
     <Grid item xs={8} className={classes.main}>
       <form autoComplete='true' encType='multipart/form-data'>
         <FormControl className={classes.formcontainer}>
-          <FormLabel className={classes.addproductlabel}>Product Details</FormLabel>
+          <FormLabel className={classes.updateproductlabel}>Update Product</FormLabel>
           <FormGroup encty>
-            <Container maxWidth='sm' className={classes.addproductcont}>
+            <Container maxWidth='sm' className={classes.updateproductcont}>
               <Grid
                 item
                 container
@@ -210,7 +199,7 @@ function UpdateProducts() {
                     size='medium'
                     required
                     fullWidth
-                    onChange={productnamechange}
+                    onChange={productidchange}
                     label='Product id'
                     variant='outlined'
                     margin='normal'
@@ -234,8 +223,8 @@ function UpdateProducts() {
                     size='medium'
                     required
                     fullWidth
-                    onChange={productpricechange}
-                    label='product Name'
+                    onChange={productnamechange}
+                    label='product name'
                     variant='outlined'
                     margin='normal'
                   />
@@ -258,7 +247,7 @@ function UpdateProducts() {
                     size='medium'
                     required
                     fullWidth
-                    onChange={productsalepricechange}
+                    onChange={productpatternchange}
                     label='product pattern'
                     variant='outlined'
                     margin='normal'
@@ -283,7 +272,7 @@ function UpdateProducts() {
                     size='medium'
                     required
                     fullWidth
-                    onChange={productmaterialchange}
+                    onChange={producttpatternchange}
                     label='product pattern'
                     variant='outlined'
                     margin='normal'
@@ -307,7 +296,7 @@ function UpdateProducts() {
                     size='medium'
                     required
                     fullWidth
-                    onChange={productdescriptionchange}
+                    onChange={productttpatternchange}
                     label='product pattern'
                     variant='outlined'
                     margin='normal'
@@ -315,31 +304,6 @@ function UpdateProducts() {
                   />
                 </Grid>
               </Grid>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
               <Grid>
                 {/* <input
@@ -350,17 +314,18 @@ function UpdateProducts() {
 													/> */}
                 <Button
                   onClick={onsubmitproduct}
-                  className={classes.addproductbutton}
+                  className={classes.updateproductbutton}
                 >
-                  Update
+                  Update Product
                 </Button>
               </Grid>
             </Container>
-          </FormGroup>
-        </FormControl>
-      </form>
-    </Grid>
+          </FormGroup >
+        </FormControl >
+      </form >
+    </Grid >
   );
 }
 
 export default UpdateProducts;
+
