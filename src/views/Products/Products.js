@@ -6,7 +6,7 @@
 
 // export default Products;
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -16,37 +16,80 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import axios from 'axios';
 
 const columns = [
   { id: 'name', label: 'Name', minWidth: 100 },
-  { id: 'product id', label: 'product id', minWidth: 100 },
-  { id: 'MRP Price', label: 'MRP Price', minWidth: 100 },
-  { id: 'sale price', label: 'sale price', minWidth: 100 },
-  { id: 'image', label: 'image', minWidth: 100 },
-  { id: 'Update', label: 'Update', minWidth: 100 },
-  { id: 'Delete', label: 'Delete', minWidth: 100 },
-
+  { id: 'productId', label: 'product id', minWidth: 100 },
+  { id: 'mrpPrice', label: 'MRP Price', minWidth: 100 },
+  { id: 'salePrice', label: 'sale price', minWidth: 100 },
 ];
 
-function createData(name, productid, population, size) {
-  const density = population / size;
-  return { name, productid, population, size, density };
+function createData(name, productId, mrpPrice, salePrice) {
+  return { name, productId, mrpPrice, salePrice };
 }
 
+let productsAll;
+const name = 'df',
+  productId = '155',
+  mrpPrice = 1599,
+  salePrice = 1299;
 const rows = [
-  createData('some shirt', 23356768),
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
+  { name, productId, mrpPrice, salePrice },
 ];
+
+// function proData() {
+//   productsAll.
+// }
 
 const useStyles = makeStyles({
   root: {
     width: '100%',
   },
   container: {
-    maxHeight: 440,
+    maxHeight: '100%',
   },
 });
 
 export default function StickyHeadTable() {
+  const [products, setProducts] = React.useState();
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -59,11 +102,26 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
+  const getProducts = async () => {
+    const resp = await axios.get(
+      `${process.env.REACT_APP_API_URL}/products/get-products`
+    );
+    // console.log(resp);
+    setProducts(resp.data);
+    // console.log(products);
+  };
+  const setProductsTo = () => {
+    productsAll = products;
+  };
+  useEffect(() => {
+    getProducts();
+    setProductsTo();
+    // console.log(productsAll);
+  });
   return (
-    <Paper className={classes.root}>
+    <Paper elevation={0} className={classes.root}>
       <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table stickyHeader aria-label='sticky table'>
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -78,32 +136,36 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => {
+                return (
+                  <TableRow hover role='checkbox' tabIndex={-1} key={row.code}>
+                    {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell key={column.id} align={column.align}>
+                          {column.format && typeof value === 'number'
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <TablePagination
+      <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
-        component="div"
+        component='div'
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
-      /> */}
+      />
     </Paper>
   );
 }

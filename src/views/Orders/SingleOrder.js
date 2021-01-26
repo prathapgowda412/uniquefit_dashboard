@@ -15,7 +15,7 @@ function SingleOrder() {
       )
     ).data;
     setorderss(orders);
-    await  setSingleOrder(
+    await setSingleOrder(
       orders.find((ord) => {
         return ord._id === order_id;
       })
