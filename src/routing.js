@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import NotFound from './layouts/components/NotFound';
+import AdminLogin from './Login/Login';
 import Dashboard from './views/Dashboard/Dashboard';
 import DeliveredOrders from './views/Orders/DeliveredOrders';
 import RecievedOrders from './views/Orders/RecievedOrders';
@@ -18,6 +19,7 @@ function Routing() {
       <Route exact path='/'>
         <Dashboard />
       </Route>
+      <Route path='/admin-login' component={AdminLogin} />
       <Route path='/products'>
         <AllProducts />
       </Route>
