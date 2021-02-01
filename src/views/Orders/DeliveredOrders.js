@@ -22,14 +22,6 @@ const useRowStyles = makeStyles({
       borderBottom: 'unset',
     },
   },
-  acceptbutton: {
-    backgroundColor: 'blue',
-    padding: '8px 24px',
-    color: 'white',
-    '&:hover': {
-      backgroundColor: 'darkblue',
-    },
-  },
 });
 
 function Row(props) {
@@ -40,21 +32,6 @@ function Row(props) {
   const classes = useRowStyles();
   const orderDate = order.orderplacedon.slice(0, 10);
   const orderTime = order.orderplacedon.slice(11, 16);
-  const handleAccept = async () => {
-    const orderData = {
-      _id: order._id,
-      orderstatus: 'Stitching',
-    };
-    const resp = await axios.post(
-      `${process.env.REACT_APP_API_URL}/products/update-order-by-id`,
-      orderData
-    );
-    if (resp.status === 203) {
-      toast.success('accepted for stitching');
-      window.location.reload();
-    }
-    // console.log(resp);
-  };
 
   // console.log(order);
   return (
@@ -77,11 +54,6 @@ function Row(props) {
         <TableCell>{order.username}</TableCell>
         <TableCell align='right'>{order.cartValue}</TableCell>
         <TableCell align='right'>{order.sellingPrice}</TableCell>
-        <TableCell>
-          <Button onClick={handleAccept} className={classes.acceptbutton}>
-            Accept
-          </Button>
-        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -139,7 +111,7 @@ function Row(props) {
   );
 }
 
-function RecievedOrders() {
+function DeliveredOrders() {
   const [orders, setOrders] = React.useState();
   const getOrders = async () => {
     const resp = await axios.get(
@@ -148,7 +120,6 @@ function RecievedOrders() {
     await setOrders(resp.data);
     // console.log(resp.data);
   };
-
   useEffect(() => {
     getOrders();
   }, []);
@@ -166,14 +137,13 @@ function RecievedOrders() {
           <TableCell>User name</TableCell>
           <TableCell align='right'>MRP</TableCell>
           <TableCell align='right'>Sellprice</TableCell>
-          <TableCell> Accept </TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
         {orders ? (
           <>
             {orders.map((order) =>
-              !'received'.localeCompare(order.orderstatus, undefined, {
+              !'Delivered'.localeCompare(order.orderstatus, undefined, {
                 sensitivity: 'base',
               }) ? (
                 <Row key={order._id} order={order} />
@@ -181,7 +151,11 @@ function RecievedOrders() {
                 ''
               )
             )}
-            {/* <Row key={order._id} order={order} /> */}
+            {/* {orders.map((order) => {
+              if (order.orderstatus === 'Delivered') {
+                return <Row key={order._id} order={order} />;
+              }
+            })} */}
           </>
         ) : (
           <CircularProgress />
@@ -191,4 +165,4 @@ function RecievedOrders() {
   );
 }
 
-export default RecievedOrders;
+export default DeliveredOrders;

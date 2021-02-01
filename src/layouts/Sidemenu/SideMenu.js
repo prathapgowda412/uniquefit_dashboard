@@ -41,7 +41,7 @@ function SideNav() {
         <List>
           <ListItem button to='/' component={NavLink}>
             <ListItemIcon>
-              <AssessmentOutlined />
+              <AssessmentOutlined color='primary' />
             </ListItemIcon>
             <ListItemText primary='Dashboard' />
           </ListItem>
@@ -62,7 +62,7 @@ const ProductsMenu = () => {
     <>
       <ListItem button onClick={handleListOpen}>
         <ListItemIcon>
-          <LoyaltyOutlined />
+          <LoyaltyOutlined color='secondary' />
         </ListItemIcon>
         <ListItemText primary='Products' />
         {listOpen ? <ExpandLess /> : <ExpandMore />}
@@ -75,25 +75,25 @@ const ProductsMenu = () => {
         >
           <ListItem button component={NavLink} to='/products'>
             <ListItemIcon>
-              <ViewListRounded />
+              <ViewListRounded style={{ color: '#FF5F6D' }} />
             </ListItemIcon>
             <ListItemText primary='All Products' />
           </ListItem>
           <ListItem button component={NavLink} to='/addProducts'>
             <ListItemIcon>
-              <AddCircleOutline />
+              <AddCircleOutline style={{ color: '#6089B1' }} />
             </ListItemIcon>
             <ListItemText primary='Add Products' />
           </ListItem>
           <ListItem button component={NavLink} to='/updateproducts'>
             <ListItemIcon>
-              <EditRounded />
+              <EditRounded style={{ color: 'purple' }} />
             </ListItemIcon>
             <ListItemText primary='Update Products' />
           </ListItem>
           <ListItem button component={NavLink} to='/deleteproducts'>
             <ListItemIcon>
-              <DeleteRounded />
+              <DeleteRounded style={{ color: 'red' }} />
             </ListItemIcon>
             <ListItemText primary='Delete Products' />
           </ListItem>
@@ -125,19 +125,19 @@ const OrdersMenu = () => {
         >
           <ListItem button component={NavLink} to='/orders-recieved'>
             <ListItemIcon>
-              <AddBoxRounded />
+              <AddBoxRounded style={{ color: '#3D44F6' }} />
             </ListItemIcon>
             <ListItemText primary='Recieved Orders' />
           </ListItem>
-          <ListItem button component={NavLink} to='/products'>
+          <ListItem button component={NavLink} to='/orders-stitching'>
             <ListItemIcon>
-              <HourglassEmptyRounded />
+              <HourglassEmptyRounded style={{ color: '#112650' }} />
             </ListItemIcon>
             <ListItemText primary='Stiching Orders' />
           </ListItem>
-          <ListItem button component={NavLink} to='/products'>
+          <ListItem button component={NavLink} to='/orders-delivered'>
             <ListItemIcon>
-              <PlaylistAddCheckRounded />
+              <PlaylistAddCheckRounded style={{ color: 'green' }} />
             </ListItemIcon>
             <ListItemText primary='Delivered Orders' />
           </ListItem>

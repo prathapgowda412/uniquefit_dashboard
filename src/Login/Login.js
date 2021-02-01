@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import UniquefitLogo from '../Assets/uniquefitblacklogo.png';
+import UniquefitLogo from '../Assets/Uniquefit_name_black.svg';
 import axios from 'axios';
 //  for checking chnages
 const useStyles = makeStyles((theme) => ({
