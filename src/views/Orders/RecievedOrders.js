@@ -42,13 +42,12 @@
 
 // export default RecievedOrders;
 
-
 // // import React from 'react';
 
 // // function Products() {
 // //   return <div> this is products </div>;
 // // }
-
+// checking changes
 // // export default Products;
 
 import React from 'react';
@@ -68,7 +67,6 @@ const columns = [
   { id: 'No. of Products', label: 'No. of Products', minWidth: 100 },
   { id: 'Order value', label: 'Order value', minWidth: 100 },
   { id: 'No.of Products', label: 'No.of Products', minWidth: 100 },
-
 ];
 
 function createData(name, productid, population, size) {
@@ -76,9 +74,7 @@ function createData(name, productid, population, size) {
   return { name, productid, population, size, density };
 }
 
-const rows = [
-  createData('23459857', 23356768),
-];
+const rows = [createData('23459857', 23356768)];
 
 const useStyles = makeStyles({
   root: {
@@ -106,7 +102,7 @@ export default function StickyHeadTable() {
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table stickyHeader aria-label='sticky table'>
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -121,20 +117,24 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => {
+                return (
+                  <TableRow hover role='checkbox' tabIndex={-1} key={row.code}>
+                    {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell key={column.id} align={column.align}>
+                          {column.format && typeof value === 'number'
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
