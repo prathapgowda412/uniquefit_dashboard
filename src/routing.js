@@ -5,6 +5,7 @@ import Dashboard from './views/Dashboard/Dashboard';
 import RecievedOrders from './views/Orders/RecievedOrders';
 import SingleOrder from './views/Orders/SingleOrder';
 import AddProducts from './views/Products/AddProducts';
+import AllProducts from './views/Products/AllProducts';
 import DeleteProducts from './views/Products/DeleteProducts';
 import Products from './views/Products/Products';
 import UpdateProducts from './views/Products/UpdateProducts';
@@ -16,7 +17,7 @@ function Routing() {
         <Dashboard />
       </Route>
       <Route path='/products'>
-        <Products />
+        <AllProducts />
       </Route>
       <Route path='/addproducts'>
         <AddProducts />

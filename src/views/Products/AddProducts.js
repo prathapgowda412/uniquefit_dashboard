@@ -140,7 +140,6 @@ function AddProducts() {
   const [productsaleprice, setproductsaleprice] = React.useState();
   const [productmaterial, setproductmaterial] = React.useState();
   const [productcolor, setproductcolor] = React.useState();
-  // const [productcategory, setproductcategory] = React.useState();
   const [producttype, setproducttype] = React.useState();
   const [productdescription, setproductdescription] = React.useState();
   const [productpattern, setproductpattern] = React.useState();

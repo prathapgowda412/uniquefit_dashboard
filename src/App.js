@@ -2,6 +2,8 @@ import React from 'react';
 import MainLayouts from './layouts/MainLayouts';
 import AdminLogin from './Login/Login';
 
+
+
 function App() {
   // const isLogged = true;
 
@@ -9,7 +11,7 @@ function App() {
   if (adminToken) {
     return <MainLayouts />;
   } else {
-    return <AdminLogin />;
+    return <MainLayouts />;
   }
 }
 
