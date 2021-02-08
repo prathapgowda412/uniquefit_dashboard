@@ -23,11 +23,11 @@ const useRowStyles = makeStyles({
     },
   },
   acceptbutton: {
-    backgroundColor: 'blue',
+    backgroundColor: 'green',
     padding: '8px 24px',
     color: 'white',
     '&:hover': {
-      backgroundColor: 'darkblue',
+      backgroundColor: 'darkgreen',
     },
   },
 });
@@ -43,19 +43,18 @@ function Row(props) {
   const handleAccept = async () => {
     const orderData = {
       _id: order._id,
-      orderstatus: 'Stitching',
+      orderstatus: 'Delivered',
     };
     const resp = await axios.post(
       `${process.env.REACT_APP_API_URL}/products/update-order-by-id`,
       orderData
     );
     if (resp.status === 203) {
-      toast.success('accepted for stitching');
+      toast.success('Delivered');
       window.location.reload();
     }
     // console.log(resp);
   };
-
   // console.log(order);
   return (
     <React.Fragment>
@@ -79,7 +78,7 @@ function Row(props) {
         <TableCell align='right'>{order.sellingPrice}</TableCell>
         <TableCell>
           <Button onClick={handleAccept} className={classes.acceptbutton}>
-            Accept
+            Delivered
           </Button>
         </TableCell>
       </TableRow>
@@ -139,7 +138,7 @@ function Row(props) {
   );
 }
 
-function RecievedOrders() {
+function StitchingOrders() {
   const [orders, setOrders] = React.useState();
   const getOrders = async () => {
     const resp = await axios.get(
@@ -148,7 +147,6 @@ function RecievedOrders() {
     await setOrders(resp.data);
     // console.log(resp.data);
   };
-
   useEffect(() => {
     getOrders();
   }, []);
@@ -173,7 +171,7 @@ function RecievedOrders() {
         {orders ? (
           <>
             {orders.map((order) =>
-              !'received'.localeCompare(order.orderstatus, undefined, {
+              !'stitching'.localeCompare(order.orderstatus, undefined, {
                 sensitivity: 'base',
               }) ? (
                 <Row key={order._id} order={order} />
@@ -181,7 +179,11 @@ function RecievedOrders() {
                 ''
               )
             )}
-            {/* <Row key={order._id} order={order} /> */}
+            {/* {orders.map((order) => {
+              if (order.orderstatus === 'stitching') {
+                return <Row key={order._id} order={order} />;
+              }
+            })} */}
           </>
         ) : (
           <CircularProgress />
@@ -191,4 +193,4 @@ function RecievedOrders() {
   );
 }
 
-export default RecievedOrders;
+export default StitchingOrders;

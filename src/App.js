@@ -12,5 +12,5 @@ function App() {
     return <MainLayouts />;
   }
 }
-// will figure it on 12th till then i have exams to complete okok bye bye take care thank you bye
+
 export default App;
